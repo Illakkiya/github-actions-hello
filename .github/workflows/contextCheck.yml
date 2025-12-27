@@ -1,0 +1,10 @@
+name: Check Context
+
+on: [push]
+
+job: 
+  Context validation
+  step:
+    echo "::My actor:: {{MY_ACTOR}}"
+    env: 
+      MY_ACTOR = {{github.actor}}
