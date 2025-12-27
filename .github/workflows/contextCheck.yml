@@ -2,10 +2,11 @@ name: Check Context
 
 on: [push]
 
-job: 
-  Context validation:
-  runs_on: ubuntu_latest
-  steps:
-    run: echo "::My actor:: {{MY_ACTOR}}"
-    env: 
-      MY_ACTOR = {{github.actor}}
+jobs:                         # 1. Must be plural 'jobs'
+  context_validation:         # 2. Job ID cannot have spaces, use underscores
+    runs-on: ubuntu-latest    # 3. Use hyphens, not underscores for 'runs-on'
+    steps:                    # 4. 'steps' must be a list (use '-')
+      - name: Display Actor
+        run: echo "The actor is ${{ env.MY_ACTOR }}"  # 5. Wrap in ${{ }}
+        env: 
+          MY_ACTOR: ${{ github.actor }}               # 6. Use ':' not '='
